@@ -9,7 +9,7 @@ import Header from './Header/Header';
 class App extends Component {
   constructor(props){
     super(props);
-  state = {
+  this.state = {
     selected: {
       Processor: {
         name: '17th Generation Intel Core HB (7 Core with donut spare)',

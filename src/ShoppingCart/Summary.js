@@ -2,12 +2,13 @@ import React from 'react';
 
 
 function Summary(props){
-    const summary = Object.keys(props.selected).map((key) =>(
+    const summary = Object.keys(props.selected).map(key =>(
         <div className="summary__option" key={key}>
         <div className="summary__option__label">{key}</div>
-        <div className="summary__option__value">{props.selected}</div>
+        <div className="summary__option__value">{props.selected[key].name}</div>
         <div className="summary__option__cost">
-          {USCurrencyFormat.format(selectedOption.cost)}
+          {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'})
+          .format(props.selected[key].cost)}
         </div>
       </div> 
     )

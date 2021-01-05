@@ -1,6 +1,6 @@
 import React from 'react';
 import Total from './Total';
-import Summary from '.Summary';
+import Summary from './Summary';
 
 function ShoppingCart(props){
     const total = Object.keys(props.selected).reduce(
