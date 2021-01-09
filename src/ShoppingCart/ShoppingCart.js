@@ -3,16 +3,27 @@ import Total from './Total';
 import Summary from './Summary';
 
 function ShoppingCart(props){
-    const total = Object.keys(props.selected).reduce(
-        (acc, curr) => acc + props.selected[curr].cost,0);
+    console.log(props);
+    return(
+        <section className="main_summary" role='region'>
+            <h3>New Greenleaf 2021</h3>
 
-        return(
-            <section className="main_summary">
-                <h2>Your Cart</h2>
-                <Summary selected={props.selected}/>
-                <Total total={total}/>
-            </section>
-        )
+            {Object.keys(props.selected)
+            .map((key, index, title) =>
+            <Summary
+            key={key}
+            index={index}
+            name={props.selected[key][0]}
+            title={Object.keys(props.selected)[index]}
+            cost={props.selected[key][1]}
+            selectedParts={props.selected}
+            />
+            )}
+            <Total
+            total={props.total}
+            />
+        </section>
+    )
 }
 
 export default ShoppingCart;

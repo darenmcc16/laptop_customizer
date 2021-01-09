@@ -1,24 +1,39 @@
 import React from 'react';
 
+class FeatureItem extends React.Component {
+        constructor(props){
+                super(props);
+                this.state = {
+                        backgroundColor: props.bgColor,
+                }
+        }
 
-function FeatureItem(props){
-    return(
-        <div className="feature_item">
-            <input
-            id={props.item.name}
-            type="radio"
-            name={props.feature}
-            className={props.featureClass}
-            checked={props.featureClass.includes('feature_selected') ? true:false}
-            onChange={e => props.handleUpdate(props.feature, props.item)}
-            />
+        handleClick() {
+                this.props.onClick && this.props.onClick(this.props.name, this.props.cost, this.props.title)
+        }
 
-            <label htmlFor={props.item.name} className="feature_label">
-                {props.item.name}
-                ({new Intl.NumberFormat('en-Us', {style: 'currency', currency: 'USD'}).format(props.item.cost)})
-            </label>
-        </div>
-    )
+        selectedColor() {
+                const selectedName = Object.keys(this.props.selected).map(key => this.props.selected[key][0])
+                        if (selectedName.includes(this.props.name)) {
+                                return 'gainsboro';
+                        }
+                return "";
+        }
+
+        render() {
+                return (
+                        <div className="feature" >
+                                        <li key={this.props.index} className="feature__item"
+                                        onClick={() => this.handleClick()}
+                                        style={{backgroundColor: this.selectedColor()}}
+                                        >
+                                        <div className="feature_option">
+                                                {this.props.name} (${this.props.cost})
+                                        </div>
+                                </li>
+                        </div>
+                )
+        }
 }
 
 export default FeatureItem;

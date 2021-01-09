@@ -3,33 +3,26 @@ import FeatureItem from './FeatureItem';
 
 
 function FeatureList (props){
-    const features = Object.keys(props.features)
-    .map(key =>{
-        const options = props.features[key].map((item, index) =>{
-            const selectedClass = item.name === props.selected[key].name ? 'feature_selected': '';
-            const featureClass = 'feature_option' + selectedClass;
-            return(
-                <FeatureItem
-                item={item}
-                key={item.name}
-                feature={key}
-                handleUpdate={props.handleUpdate}
-                featureClass={featureClass}
-                />
-            )
-        });
-        return(
-            <div className='feature' key={key}>
-                <legend className='feature_name'>
-                    <h3>{key}</h3>
-                </legend>
-                {/*<ul className="feature_list">*/}
-                {options}
-                {/*</ul>*/}
-            </div>
-        )
-    });
-    return features
+    return (
+        <section className="main__form">
+            <div className="feature__name">{props.title}</div>
+            <ul className="feature__list">
+                {props.options && props.options.map((key, index, options,) =>
+                    <FeatureItem
+                        key={index}
+                        title={props.title}
+                        parts={options[index]}
+                        selected={props.selected}
+                        name={key.name}
+                        cost={key.cost}
+                        onClick={props.onClick}
+                        bgColor={props.bgColor}
+                        change={props.change}                   
+                    />
+                )}
+            </ul>
+        </section>
+    );
 }
 
 export default FeatureList;
